@@ -1,0 +1,28 @@
+name: Python application tests
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Run tests
+      run: |
+        python find_lowest_number.py test_data/test1_input.txt test1_output.txt
+        diff test1_output.txt test_data/test1_expected.txt
+
+        python find_lowest_number.py test_data/test2_input.txt test2_output.txt
+        diff test2_output.txt test_data/test2_expected.txt
+
+        python find_lowest_number.py test_data/test3_input.txt test3_output.txt
+        diff test3_output.txt test_data/test3_expected.txt
+
